@@ -4,7 +4,6 @@
   "description": "",
   "main": "src/loader.js",
   "scripts": {
-    "start": "web: node src/loader.js",
     "dev": "nodemon",
     "production": "pm2 start src/loader.js --name page_chat-api",
     "production-stop": "pm2 stop page_chat-api"
@@ -22,5 +21,9 @@
     "pm2": "^2.1.5",
     "watson-developer-cloud": "^3.15.1",
     "dotenv": "^6.2.0"
+  },
+  "engines": {
+    "node": "8.15.1",
+    "npm": "6.4.1"
   }
 }
