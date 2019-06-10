@@ -1,5 +1,5 @@
 require('dotenv').config() //Obtem as variáveis de ambiente do arquivo '.env'
-var AssistantV1 = require('ibm-watson/assistant/v1');
+const AssistantV1 = require('ibm-watson/assistant/v1');
 const chatService = require('../chat/chatService')
 const produtosService = require('../produtos/produtosService')
 
