@@ -1436,6 +1436,26 @@ Por fim, basta enviá-lo para o heroku com o comando push:
 $ git push heroku master
 ```
 
+Se tudo ocorrer corretamente, no final deste comando terá algo do tipo:
+
+```shell
+...
+remote:        Released v28
+remote:        https://lojajp-backend.herokuapp.com/ deployed to Heroku
+remote: 
+remote: Verifying deploy... done.
+To https://git.heroku.com/lojajp-backend.git
+   8293bba..d758e58  master -> master
+```
+
+No exemplo acima, o servidor estará rodando em [https://lojajp-backend.herokuapp.com/](https://lojajp-backend.herokuapp.com/).
+
+Caso ocorra algum erro você pode analisá-lo pelo comando:
+
+```shell
+$ heroku logs --tail
+```
+
 ## Créditos
 
 Criado por: [João Paulo de Melo](https://www.jpmdik.com.br/)
