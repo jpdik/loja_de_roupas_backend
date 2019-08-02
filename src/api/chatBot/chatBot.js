@@ -147,6 +147,7 @@ module.exports.analisarConstruirMensagem = (input) => new Promise((resolve, reje
                             case 'option':
                                 user.messages.push({
                                     message: object.title,
+                                    description: object.description,
                                     options: object.options,
                                     type: object.response_type,
                                     base: 'received'

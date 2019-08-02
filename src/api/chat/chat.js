@@ -3,6 +3,7 @@ const mongoose = restful.mongoose
 
 const messageSchema = new mongoose.Schema({
     message: { type: String },
+    description: { type: String },
     base: { type: String, default: 'sent' },
     type: { type: String, default: 'text', required: true},
     sendAt: { type: Date, default: Date.now },

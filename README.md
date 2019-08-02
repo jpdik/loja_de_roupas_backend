@@ -28,7 +28,7 @@ $ npm init -y
 Vamos instalar as dependências do nosso projeto com o comando:
 
 ```shell
-$ npm install body-parser@1.15.2 dotenv@6.2.0 express@4.14.0 express-query-int@1.0.1 mongoose@4.7.0 node-restful@0.2.5 nodemon@1.11.0 pm2@2.1.5 watson-developer-cloud@3.15.1 --save
+$ npm install body-parser@1.15.2 dotenv@6.2.0 express@4.14.0 express-query-int@1.0.1 mongoose@4.7.0 node-restful@0.2.5 nodemon@1.11.0 pm2@2.1.5 ibm-watson@4.1.3 --save
 ```
 
 Onde:
@@ -40,7 +40,7 @@ Onde:
 - [`node-restful`](https://github.com/baugarten/node-restful): Jutamente com o mongoose, ele permite gerar recursos e rotas RESTful automaticamente (GET, POST, PUT, DELETE);
 - [`nodemon`](https://nodemon.io/): é uma ferramenta que monitora as mudanças do servidor que esta rodando e reinicia o serviço automaticamente durante as mudanças. Perfeito para desenvolvimento;
 - [`pm2`](http://pm2.keymetrics.io/): Gerenciador de processos em produção para o NodeJS;
-- [`watson-developer-cloud`](https://github.com/watson-developer-cloud/node-sdk): Biblioteca responsável pelas comunicações com o watson da IBM;
+- [`ibm-watson`](https://github.com/watson-developer-cloud/node-sdk): Biblioteca responsável pelas comunicações com o watson da IBM;
 
 ### Criando scripts
 
@@ -100,7 +100,7 @@ Nosso `package.json` final deverá ficar assim:
     "node-restful": "^0.2.5",
     "nodemon": "^1.11.0",
     "pm2": "^2.1.5",
-    "watson-developer-cloud": "^3.15.1"
+    "ibm-watson": "^4.1.3"
   },
   "engines": {
     "node": "8.15.1",
@@ -1004,11 +1004,11 @@ Nosso arquivo final (`src/api/chatBot/chatBot.js`) ficará assim:
 
 ```js
 require('dotenv').config()
-const watson = require('watson-developer-cloud');
+const AssistantV1 = require('ibm-watson/assistant/v1');
 const chatService = require('../chat/chatService')
 const produtosService = require('../produtos/produtosService')
 
-const assistant = new watson.AssistantV1({
+const assistant = new AssistantV1({
     username: process.env.WATSON_USERNAME,
     password: process.env.WATSON_PASSWORD,
     url: process.env.WATSON_URL,
