@@ -2,9 +2,11 @@ const restful = require('node-restful')
 const mongoose = restful.mongoose
 
 const messageSchema = new mongoose.Schema({
-    message: { type: String, required: true },
+    message: { type: String },
     base: { type: String, default: 'sent' },
-    sendAt: { type: Date, default: Date.now }
+    type: { type: String, default: 'text', required: true},
+    sendAt: { type: Date, default: Date.now },
+    options: []
 })
 
 const chatSchema = new mongoose.Schema({

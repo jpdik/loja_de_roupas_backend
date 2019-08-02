@@ -141,12 +141,27 @@ module.exports.analisarConstruirMensagem = (input) => new Promise((resolve, reje
                         message: input.message.text
                     });
 
-                    resp.output.text.forEach(message => {
-                        //adicionando uma mensagem na lista.
-                        user.messages.push({
-                            message: message,
-                            base: 'received'
-                        });
+                    resp.output.generic.forEach(object => {
+                        switch (object.response_type) {
+                            //adiciona no modo opção
+                            case 'option':
+                                user.messages.push({
+                                    message: object.title,
+                                    options: object.options,
+                                    type: object.response_type,
+                                    base: 'received'
+                                });
+                                break;
+
+                            default:
+                                //adicionando uma mensagem na lista se for comum.
+                                user.messages.push({
+                                    message: object.text,
+                                    type: object.response_type,
+                                    base: 'received'
+                                });
+                                break;
+                        }
                     });
 
                     // Armazeno o fluxo de contexto da conversação que foi obtida como respota do watson na sessão do usuário.

@@ -15,13 +15,7 @@ module.exports = function (server) {
     // rota de inserção (manualmente construida) de mensagem no banco de dados chatService
     api.post('/chat', (req, res) => { // http://localhost:3003/api/chat (POST)
 
-        // Verifica se a requisição (req) tem alguma mensagem em seu corpo
-        if (!req.body.message) {
-            res.status(403).send({ errors: ['No message provided.'] })
-            /*Responde ao usuário 403 (Forbidden),
-            informando em JSON que não foi fornecida nenhuma mensagem */
-            return;
-        }
+        req.body.message = req.body.message ? req.body.message : '';
 
         // Chama a função que vai analisar a mensagem do usuário, e responder
         chatBot.analisarConstruirMensagem({
