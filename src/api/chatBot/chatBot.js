@@ -65,14 +65,14 @@ reconstruirIntencoesEntidadesContexto = (watsonObject) => new Promise((resolve, 
                     produtosService.find({ "name": { "$regex": search.trim(), "$options": "i" } }, (err, data) => {
                         // Se não achei, contateno a mensagem de que não foi encontrado aquele.
                         if (err || data.length == 0 || data == undefined) {
-                            watsonObject.output.text[0] += ", Este outro produto não foi encontrado.";
+                            watsonObject.output.generic[0].text += ", Este outro produto não foi encontrado.";
                             resolve(watsonObject); //Return da promisse
                         }
                         // Caso ache, eu coloco na lista de contexto items e adiciono o nome do produto na mensagem de usuário.
                         else {
                             // Se eu tenho uma lista, adiciono a ela, se a lista não existe, crio ela.
                             watsonObject.context.hasOwnProperty("itens") && watsonObject.context.itens != '' ? watsonObject.context.itens.push(data[0]) : watsonObject.context.itens = [data[0]];
-                            watsonObject.output.text[0] += ` ${data[0].name}, `; // Adicionando nome do produto na mensagem.
+                            watsonObject.output.generic[0].text += ` ${data[0].name}, `; // Adicionando nome do produto na mensagem.
                             resolve(watsonObject); //Return da promisse
                         }
                     });
@@ -88,7 +88,7 @@ reconstruirIntencoesEntidadesContexto = (watsonObject) => new Promise((resolve, 
     else if (watsonObject.intents.length > 0 && watsonObject.intents[0].intent == 'ver_carrinho') {
         // Pego todos os itens do meu carrinho que são objetos, e exibo seus nomes usando o map do nodejs.
         if (watsonObject.context.hasOwnProperty("itens") && watsonObject.context.itens != '') {
-            watsonObject.output.text[0] += ` Eles são: ${watsonObject.context.itens.map(item => item.name).join(', ')}`;
+            watsonObject.output.generic[0].text += ` Eles são: ${watsonObject.context.itens.map(item => item.name).join(', ')}`;
         }
         resolve(watsonObject); // Return da promise reconstruirIntencoesEntidadesContexto 
     }
@@ -108,11 +108,11 @@ reconstruirIntencoesEntidadesContexto = (watsonObject) => new Promise((resolve, 
             });
         }
         else {
-            watsonObject.output.text[0] = "Não tem nada no seu carrinho!";
+            watsonObject.output.generic[0].text = "Não tem nada no seu carrinho!";
         }
 
         if (!tem_numero) {
-            watsonObject.output.text[0] = "Você precisa me informar um número";
+            watsonObject.output.generic[0].text = "Você precisa me informar um número";
         }
 
         resolve(watsonObject); // Return da promise reconstruirIntencoesEntidadesContexto
